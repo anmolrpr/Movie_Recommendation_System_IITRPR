@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Movie Recommender</title>
+    <link rel="stylesheet" href="/static/style.css?v=1.3">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Auth View -->
+        <div id="auth-view" class="view">
+            <div class="auth-container">
+                <h1>🎬 MovieMind</h1>
+                <p>AI-Powered Recommendations</p>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showAuthForm('login')">Login</button>
+                    <button class="tab" onclick="showAuthForm('register')">Register</button>
+                </div>
+
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <input type="text" id="login-username" placeholder="Username" required>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+
+                <form id="register-form" class="hidden" onsubmit="handleRegister(event)">
+                    <input type="text" id="reg-username" placeholder="Choose Username" required>
+                    <input type="password" id="reg-password" placeholder="Choose Password" required>
+                    <button type="submit" class="btn-secondary">Create Account</button>
+                </form>
+                <p id="auth-msg" class="error-msg"></p>
+            </div>
+        </div>
+
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="view hidden">
+            <header>
+                <h2>Welcome, <span id="user-display">User</span></h2>
+                <button onclick="logout()" class="btn-small">Logout</button>
+            </header>
+
+            <main>
+                <div class="mood-section">
+                    <h3>How are you feeling?</h3>
+                    <textarea id="mood-input"
+                        placeholder="e.g., I'm sad and want a sci-fi movie to cheer me up..."></textarea>
+                    <button onclick="getRecommendation()" class="btn-primary" id="rec-btn">Get Recommendation ✨</button>
+                </div>
+
+                <div id="results-container" class="hidden">
+                    <!-- Cards will be injected here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Card Template (Hidden) -->
+    <template id="card-template">
+        <div class="card">
+            <div class="card-content">
+                <span class="badge">Recommended For You</span>
+                <h2 class="movie-title">Title Here</h2>
+
+                <div class="meta-info">
+                    <p><strong>Year:</strong> <span class="release-date">Unknown</span></p>
+                    <p><strong>Genres:</strong> <span class="genres-list">Unknown</span></p>
+                    <p class="match-score">Match Score: <span class="score-val">0.0</span></p>
+
+                </div>
+
+                <div class="rating-section">
+                    <p>Rate this recommendation:</p>
+                    <div class="stars">
+                        <button>★</button>
+                        <button>★</button>
+                        <button>★</button>
+                        <button>★</button>
+                        <button>★</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script src="/static/app.js?v=1.4"></script>
+</body>
+
+</html>
